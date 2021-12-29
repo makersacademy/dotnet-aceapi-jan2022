@@ -35,11 +35,9 @@ namespace Acebook
 
             services.AddControllers();
 
+            string connectionString = Configuration.GetConnectionString("DefaultConnection") ?? Configuration["POSTGRESQLCONNSTR_DefaultConnection"];
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-
-            // Print out all configuration
-            Configuration.GetSection("ConnectionStrings").GetChildren().ToList().ForEach(x => Console.WriteLine(x.Key + ": " + x.Value));
+                options.UseNpgsql(connectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
