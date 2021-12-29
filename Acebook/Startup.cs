@@ -38,6 +38,12 @@ namespace Acebook
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
+            // Print out all configuration
+            foreach (var item in Configuration.AsEnumerable())
+            {
+                Console.WriteLine($"{item.Key} : {item.Value}");
+            }
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
