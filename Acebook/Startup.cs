@@ -39,10 +39,7 @@ namespace Acebook
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             // Print out all configuration
-            foreach (var item in Configuration.AsEnumerable())
-            {
-                Console.WriteLine($"{item.Key} : {item.Value}");
-            }
+            Configuration.GetSection("ConnectionStrings").GetChildren().ToList().ForEach(x => Console.WriteLine(x.Key + ": " + x.Value));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
