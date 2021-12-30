@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Acebook.DbContext;
 using Acebook.IdentityAuth;
 using Acebook.Models;
@@ -14,7 +12,7 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.PostsRequests
 {
-    public class CreatePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
+  public class CreatePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;

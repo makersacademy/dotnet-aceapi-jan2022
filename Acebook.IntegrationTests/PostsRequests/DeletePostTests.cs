@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using Acebook.DbContext;
 using Acebook.IdentityAuth;
 using Acebook.Models;
@@ -11,7 +9,7 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.PostsRequests
 {
-    public class DeletePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
+  public class DeletePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;

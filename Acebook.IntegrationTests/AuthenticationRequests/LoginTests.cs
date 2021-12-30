@@ -1,8 +1,6 @@
-using System.Net;
 using System.Net.Http;
 using Acebook.DbContext;
 using Acebook.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using TestSupport.EfHelpers;
@@ -10,7 +8,7 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.AuthenticationRequests
 {
-    public class LoginTests : IClassFixture<TestingWebApplicationFactory<Startup>>
+  public class LoginTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;

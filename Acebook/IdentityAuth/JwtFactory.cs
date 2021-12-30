@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using Acebook.IdentityAuth;
 using Acebook.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Acebook.IdentityAuth
 {
-    public class JwtFactory
+  public class JwtFactory
     {
         private const int TokenExpiryHours = 3;
         private readonly IConfiguration configuration;

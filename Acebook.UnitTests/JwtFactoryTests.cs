@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
 using Acebook.IdentityAuth;
 using Acebook.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using Xunit;
 
 namespace Acebook.UnitTests
 {
-    public class JwtFactoryTests
+  public class JwtFactoryTests
     {
         private const string TestingSecret =
             "RTSlzmc0+HagKxnwxiJMYPaiWEDSe76y5djd3PtWXBdkUyghVefzdbdI+OXt1qu4" +
