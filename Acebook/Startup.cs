@@ -62,6 +62,8 @@ namespace Acebook
                 };
             });
 
+            services.AddSingleton<JwtFactory>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Acebook", Version = "v1" });
@@ -95,7 +97,11 @@ namespace Acebook
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext dbContext)
         {
-            dbContext.Database.Migrate();
+            if (!env.IsEnvironment("Testing"))
+            {
+                dbContext.Database.Migrate();
+                app.UseHttpsRedirection();
+            }
 
             if (env.IsDevelopment())
             {
@@ -103,8 +109,6 @@ namespace Acebook
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Acebook v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseRouting();
