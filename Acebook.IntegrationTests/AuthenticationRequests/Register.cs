@@ -30,15 +30,20 @@ namespace Acebook.IntegrationTests.AuthenticationRequests
             var client = this.factory.CreateClient();
 
             // Act
-            var response = await client.PostAsync("/api/authenticate/register",
-                new StringContent("{ \"username\": \"fred\", \"password\": \"Password123$\" }",
-                    System.Text.Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(
+                "/api/authenticate/register",
+                new StringContent(
+                    "{ \"username\": \"fred\", \"password\": \"Password123$\" }",
+                    System.Text.Encoding.UTF8,
+                    "application/json"));
 
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8",
+            Assert.Equal(
+                "application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
-            Assert.Equal("{\"status\":\"Success\",\"message\":\"User created successfully\"}",
+            Assert.Equal(
+                "{\"status\":\"Success\",\"message\":\"User created successfully\"}",
                 await response.Content.ReadAsStringAsync());
 
             var user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.UserName == "fred");

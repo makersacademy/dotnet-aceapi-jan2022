@@ -60,7 +60,7 @@ namespace Acebook.Controllers
             var post = new Post
             {
                 UserId = user.Id,
-                Body = postDto.Body
+                Body = postDto.Body,
             };
 
             this.context.Posts.Add(post);

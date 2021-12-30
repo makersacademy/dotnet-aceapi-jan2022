@@ -42,7 +42,8 @@ namespace Acebook.IntegrationTests.PostsRequests
 
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8",
+            Assert.Equal(
+                "application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             var postDto = JsonSerializer.Deserialize<PostDto>(responseString);

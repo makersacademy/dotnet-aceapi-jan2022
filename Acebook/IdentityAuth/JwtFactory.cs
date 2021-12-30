@@ -13,7 +13,7 @@ namespace Acebook.IdentityAuth
 {
     public class JwtFactory
     {
-        private const int TOKEN_EXPIRY_HOURS = 3;
+        private const int TokenExpiryHours = 3;
         private readonly IConfiguration configuration;
 
         public JwtFactory(IConfiguration configuration)
@@ -35,15 +35,14 @@ namespace Acebook.IdentityAuth
             var token = new JwtSecurityToken(
                 issuer: this.configuration["JWT:ValidIssuer"],
                 audience: this.configuration["JWT:ValidAudience"],
-                expires: utcNow.AddHours(TOKEN_EXPIRY_HOURS),
+                expires: utcNow.AddHours(TokenExpiryHours),
                 claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            );
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
 
             var tokenDto = new TokenDto
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiration = token.ValidTo
+                Expiration = token.ValidTo,
             };
 
             return tokenDto;

@@ -43,7 +43,8 @@ namespace Acebook.IntegrationTests.PostsRequests
 
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal("application/json; charset=utf-8",
+            Assert.Equal(
+                "application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
             var responseString = await response.Content.ReadAsStringAsync();
             var posts = JsonSerializer.Deserialize<List<PostDto>>(responseString);
@@ -52,6 +53,5 @@ namespace Acebook.IntegrationTests.PostsRequests
             Assert.Equal("fred", posts[0].User.Username);
             Assert.Equal("Hello World 2", posts[1].Body);
         }
-
     }
 }

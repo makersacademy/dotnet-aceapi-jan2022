@@ -32,7 +32,6 @@ namespace Acebook
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection") ?? Configuration["POSTGRESQLCONNSTR_DefaultConnection"];
@@ -58,7 +57,7 @@ namespace Acebook
                     ValidateAudience = true,
                     ValidAudience = Configuration["JWT:ValidAudience"],
                     ValidIssuer = Configuration["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration["JWT:Secret"])),
                 };
             });
 
@@ -84,12 +83,11 @@ namespace Acebook
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-
+                                Id = "Bearer",
+                            },
                         },
                         new List<string>()
-                    }
+                    },
                 });
             });
         }

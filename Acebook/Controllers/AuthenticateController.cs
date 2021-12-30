@@ -34,7 +34,7 @@ namespace Acebook.AuthenticateController
             var user = new ApplicationUser()
             {
                 UserName = model.Username,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
             };
             var result = await this.userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
@@ -55,6 +55,7 @@ namespace Acebook.AuthenticateController
                 TokenDto tokenDto = this.jwtFactory.GenerateToken(user, Guid.NewGuid(), DateTime.UtcNow);
                 return Ok(tokenDto);
             }
+
             return Unauthorized();
         }
 

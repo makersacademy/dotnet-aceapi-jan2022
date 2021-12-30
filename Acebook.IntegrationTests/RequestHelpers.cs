@@ -10,9 +10,12 @@ namespace Acebook.IntegrationTests
     {
         public static async Task<HttpClient> Login(HttpClient client, ApplicationUser user, string password)
         {
-            var response = await client.PostAsync("/api/authenticate/login",
-                new StringContent(JsonSerializer.Serialize(new LoginDto { Username = user.UserName, Password = password }),
-                    System.Text.Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(
+                "/api/authenticate/login",
+                new StringContent(
+                    JsonSerializer.Serialize(new LoginDto { Username = user.UserName, Password = password }),
+                    System.Text.Encoding.UTF8,
+                    "application/json"));
 
             var tokenDto = JsonSerializer.Deserialize<TokenDto>(await response.Content.ReadAsStringAsync());
 

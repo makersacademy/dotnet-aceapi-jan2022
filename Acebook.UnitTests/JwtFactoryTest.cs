@@ -11,7 +11,7 @@ namespace Acebook.UnitTests
 {
     public class JwtFactoryTest
     {
-        private const string TESTING_SECRET =
+        private const string TestingSecret =
             "RTSlzmc0+HagKxnwxiJMYPaiWEDSe76y5djd3PtWXBdkUyghVefzdbdI+OXt1qu4" +
             "jvev5iOtT57VCIhZSOrEpAR+zbe7dZRCUeZyQeqGepHwgJvOjqKYYUgCqYswQsX6" +
             "Mjp760m9GkGivFtqyq9vSpCHm2EdV8lTW9j7zaCH1UgTL9JTKRNYPhjYih2Rnu7+" +
@@ -22,7 +22,7 @@ namespace Acebook.UnitTests
         {
             // Arrange
             var configurationMock = new Mock<IConfiguration>();
-            configurationMock.Setup(x => x["JWT:Secret"]).Returns(TESTING_SECRET);
+            configurationMock.Setup(x => x["JWT:Secret"]).Returns(TestingSecret);
             configurationMock.Setup(x => x["JWT:ValidIssuer"]).Returns("issuer");
             configurationMock.Setup(x => x["JWT:ValidAudience"]).Returns("audience");
             var jwtFactory = new JwtFactory(configurationMock.Object);
@@ -32,7 +32,7 @@ namespace Acebook.UnitTests
             {
                 Id = "fc0dcc69-d6df-435a-a9e0-a0b00afe1352",
                 UserName = "testUserName",
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
             };
             var tokenId = Guid.Parse("054ce858-e899-40d3-894b-2aabb81f2bda");
             var fixedTime = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc);

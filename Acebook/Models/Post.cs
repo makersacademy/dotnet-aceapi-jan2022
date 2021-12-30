@@ -21,7 +21,7 @@ namespace Acebook.Models
             {
                 Id = Id,
                 Body = Body,
-                User = User?.ToDto()
+                User = User?.ToDto(),
             };
         }
     }

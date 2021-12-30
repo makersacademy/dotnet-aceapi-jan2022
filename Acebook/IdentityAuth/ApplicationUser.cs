@@ -13,7 +13,7 @@ namespace Acebook.IdentityAuth
             return new ApplicationUserDto
             {
                 Id = Id,
-                Username = UserName
+                Username = UserName,
             };
         }
     }
