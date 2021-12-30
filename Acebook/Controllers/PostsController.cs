@@ -84,10 +84,5 @@ namespace Acebook.Controllers
 
             return NoContent();
         }
-
-        private bool PostExists(int id)
-        {
-            return _context.Posts.Any(e => e.Id == id);
-        }
     }
 }

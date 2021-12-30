@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Acebook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211223191827_changepostuserid")]
-    partial class changepostuserid
+    [Migration("20211223191827_ChangePostUserId")]
+    partial class ChangePostUserId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Acebook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211223194945_updaterelationships")]
-    partial class updaterelationships
+    [Migration("20211223194945_UpdateRelationships")]
+    partial class UpdateRelationships
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

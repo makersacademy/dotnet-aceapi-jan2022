@@ -2,7 +2,7 @@
 
 namespace Acebook.Migrations
 {
-    public partial class updaterelationships : Migration
+    public partial class UpdateRelationships : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

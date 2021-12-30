@@ -2,7 +2,7 @@
 
 namespace Acebook.Migrations
 {
-    public partial class addpostuser : Migration
+    public partial class AddPostUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
