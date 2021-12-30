@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Acebook.DBContext;
+using Acebook.DbContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

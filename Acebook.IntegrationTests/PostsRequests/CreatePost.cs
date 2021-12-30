@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Acebook.DBContext;
+using Acebook.DbContext;
 using Acebook.IdentityAuth;
 using Acebook.Models;
 using Microsoft.AspNetCore.Identity;
@@ -16,26 +16,25 @@ namespace Acebook.IntegrationTests.PostsRequests
 {
     public class CreatePost : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
-        private readonly TestingWebApplicationFactory<Startup> _factory;
-        private readonly ApplicationDbContext _dbContext;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly TestingWebApplicationFactory<Startup> factory;
+        private readonly ApplicationDbContext dbContext;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public CreatePost(TestingWebApplicationFactory<Startup> factory)
         {
-            _factory = factory;
-            _dbContext = _factory.Services.GetService<ApplicationDbContext>();
-            _dbContext.Database.EnsureClean();
-            _userManager = _factory.Services.GetService<UserManager<ApplicationUser>>();
+            this.factory = factory;
+            this.dbContext = this.factory.Services.GetService<ApplicationDbContext>();
+            this.dbContext.Database.EnsureClean();
+            this.userManager = this.factory.Services.GetService<UserManager<ApplicationUser>>();
         }
-
 
         [Fact]
         public async void CreatesAPost()
         {
             // Arrange
-            var client = _factory.CreateClient();
+            var client = this.factory.CreateClient();
             var user = new ApplicationUser { UserName = "fred" };
-            await _userManager.CreateAsync(user, "Password123$");
+            await this.userManager.CreateAsync(user, "Password123$");
             await RequestHelpers.Login(client, user, "Password123$");
 
             // Act
@@ -46,8 +45,8 @@ namespace Acebook.IntegrationTests.PostsRequests
 
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal(1, _dbContext.Posts.Count());
-            Assert.Equal("Hello World", _dbContext.Posts.OrderBy(p => p.Id).First().Body);
+            Assert.Equal(1, this.dbContext.Posts.Count());
+            Assert.Equal("Hello World", this.dbContext.Posts.OrderBy(p => p.Id).First().Body);
         }
     }
 }

@@ -3,7 +3,7 @@ using Acebook.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Acebook.DBContext
+namespace Acebook.DbContext
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

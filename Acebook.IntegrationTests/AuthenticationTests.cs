@@ -1,6 +1,6 @@
 using System.Net;
 using System.Net.Http;
-using Acebook.DBContext;
+using Acebook.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -11,14 +11,14 @@ namespace Acebook.IntegrationTests
 {
     public class AuthenticationTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
-        private readonly TestingWebApplicationFactory<Startup> _factory;
-        private readonly ApplicationDbContext _dbContext;
+        private readonly TestingWebApplicationFactory<Startup> factory;
+        private readonly ApplicationDbContext dbContext;
 
         public AuthenticationTests(TestingWebApplicationFactory<Startup> factory)
         {
-            _factory = factory;
-            _dbContext = _factory.Services.GetService<ApplicationDbContext>();
-            _dbContext.Database.EnsureClean();
+            this.factory = factory;
+            this.dbContext = this.factory.Services.GetService<ApplicationDbContext>();
+            this.dbContext.Database.EnsureClean();
         }
 
         // POST /api/Authenticate/Register
@@ -27,7 +27,7 @@ namespace Acebook.IntegrationTests
         public async void TestRegistrationCreatesUser()
         {
             // Arrange
-            var client = _factory.CreateClient();
+            var client = this.factory.CreateClient();
 
             // Act
             var response = await client.PostAsync("/api/authenticate/register",
@@ -41,7 +41,7 @@ namespace Acebook.IntegrationTests
             Assert.Equal("{\"status\":\"Success\",\"message\":\"User created successfully\"}",
                 await response.Content.ReadAsStringAsync());
 
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == "fred");
+            var user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.UserName == "fred");
             Assert.Equal("fred", user.UserName);
         }
 
@@ -50,7 +50,7 @@ namespace Acebook.IntegrationTests
         public async void TestValidationReturnsForbiddenIfUnauthenticated()
         {
             // Arrange
-            var client = _factory.CreateClient();
+            var client = this.factory.CreateClient();
 
             // Act
             var response = await client.GetAsync("/api/authenticate/status");
@@ -65,7 +65,7 @@ namespace Acebook.IntegrationTests
         public async void TestRegistrationFlowAllowsAccess()
         {
             // Arrange
-            var client = _factory.CreateClient();
+            var client = this.factory.CreateClient();
             await client.PostAsync("/api/authenticate/register",
                 new StringContent("{ \"username\": \"fred\", \"password\": \"Password123$\" }",
                     System.Text.Encoding.UTF8, "application/json"));

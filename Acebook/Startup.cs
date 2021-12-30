@@ -1,4 +1,4 @@
-using Acebook.DBContext;
+using Acebook.DbContext;
 using Acebook.IdentityAuth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
