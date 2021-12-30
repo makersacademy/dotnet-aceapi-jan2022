@@ -30,7 +30,8 @@ namespace Acebook.IdentityAuth
                 new Claim(JwtRegisteredClaimNames.Jti, tokenId.ToString()),
             };
 
-            var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(this.configuration["JWT:Secret"]));
+            var authSigningKey = new SymmetricSecurityKey(
+                System.Text.Encoding.UTF8.GetBytes(this.configuration["JWT:Secret"]));
 
             var token = new JwtSecurityToken(
                 issuer: this.configuration["JWT:ValidIssuer"],

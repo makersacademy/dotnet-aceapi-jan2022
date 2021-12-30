@@ -9,27 +9,23 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.AuthenticationRequests
 {
-    public class Register : IClassFixture<TestingWebApplicationFactory<Startup>>
+    public class RegisterTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;
 
-        public Register(TestingWebApplicationFactory<Startup> factory)
+        public RegisterTests(TestingWebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
             this.dbContext = this.factory.Services.GetService<ApplicationDbContext>();
             this.dbContext.Database.EnsureClean();
         }
 
-        // POST /api/Authenticate/Register
-        // { username: "username", password: "password" }
         [Fact]
         public async void CreatesUser()
         {
-            // Arrange
             var client = this.factory.CreateClient();
 
-            // Act
             var response = await client.PostAsync(
                 "/api/authenticate/register",
                 new StringContent(
@@ -37,7 +33,6 @@ namespace Acebook.IntegrationTests.AuthenticationRequests
                     System.Text.Encoding.UTF8,
                     "application/json"));
 
-            // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(
                 "application/json; charset=utf-8",

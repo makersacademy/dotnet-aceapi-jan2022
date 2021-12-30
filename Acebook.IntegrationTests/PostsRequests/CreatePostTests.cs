@@ -1,5 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Acebook.DbContext;
 using Acebook.IdentityAuth;
 using Acebook.Models;
@@ -10,13 +14,13 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.PostsRequests
 {
-    public class IndexPosts : IClassFixture<TestingWebApplicationFactory<Startup>>
+    public class CreatePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public IndexPosts(TestingWebApplicationFactory<Startup> factory)
+        public CreatePostTests(TestingWebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
             this.dbContext = this.factory.Services.GetService<ApplicationDbContext>();
@@ -24,34 +28,22 @@ namespace Acebook.IntegrationTests.PostsRequests
             this.userManager = this.factory.Services.GetService<UserManager<ApplicationUser>>();
         }
 
-        // GET /api/Posts
         [Fact]
-        public async void GetsListOfPosts()
+        public async void CreatesAPost()
         {
-            // Arrange
             var client = this.factory.CreateClient();
             var user = new ApplicationUser { UserName = "fred" };
             await this.userManager.CreateAsync(user, "Password123$");
             await RequestHelpers.Login(client, user, "Password123$");
-            var post1 = new Post { UserId = user.Id, Body = "Hello World" };
-            var post2 = new Post { UserId = user.Id, Body = "Hello World 2" };
-            this.dbContext.Posts.AddRange(post1, post2);
-            await this.dbContext.SaveChangesAsync();
 
-            // Act
-            var response = await client.GetAsync("/api/posts");
+            var response = await client.PostAsync("/api/posts", new StringContent(
+                JsonSerializer.Serialize(new Post { Body = "Hello World" }),
+                Encoding.UTF8,
+                "application/json"));
 
-            // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal(
-                "application/json; charset=utf-8",
-                response.Content.Headers.ContentType.ToString());
-            var responseString = await response.Content.ReadAsStringAsync();
-            var posts = JsonSerializer.Deserialize<List<PostDto>>(responseString);
-            Assert.Equal(2, posts.Count);
-            Assert.Equal("Hello World", posts[0].Body);
-            Assert.Equal("fred", posts[0].User.Username);
-            Assert.Equal("Hello World 2", posts[1].Body);
+            Assert.Equal(1, this.dbContext.Posts.Count());
+            Assert.Equal("Hello World", this.dbContext.Posts.OrderBy(p => p.Id).First().Body);
         }
     }
 }

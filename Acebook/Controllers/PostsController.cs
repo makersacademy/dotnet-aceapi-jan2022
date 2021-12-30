@@ -26,7 +26,7 @@ namespace Acebook.Controllers
             this.userManager = userManager;
         }
 
-        // GET: api/Posts
+        // GET: /api/Posts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PostDto>>> GetPost()
         {
@@ -35,7 +35,7 @@ namespace Acebook.Controllers
                 .Select(p => p.ToDto()).ToListAsync();
         }
 
-        // GET: api/Posts/5
+        // GET: /api/Posts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PostDto>> GetPost(int id)
         {
@@ -51,7 +51,7 @@ namespace Acebook.Controllers
             return post.ToDto();
         }
 
-        // POST: api/Posts
+        // POST: /api/Posts
         [HttpPost]
         public async Task<ActionResult<Post>> PostPost(PostDto postDto)
         {
@@ -69,7 +69,7 @@ namespace Acebook.Controllers
             return CreatedAtAction("GetPost", new { id = post.Id }, post.ToDto());
         }
 
-        // DELETE: api/Posts/5
+        // DELETE: /api/Posts/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Post>> DeletePost(int id)
         {

@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Acebook.UnitTests
 {
-    public class JwtFactoryTest
+    public class JwtFactoryTests
     {
         private const string TestingSecret =
             "RTSlzmc0+HagKxnwxiJMYPaiWEDSe76y5djd3PtWXBdkUyghVefzdbdI+OXt1qu4" +
@@ -20,14 +20,11 @@ namespace Acebook.UnitTests
         [Fact]
         public void GenerateTokenReturnsAToken()
         {
-            // Arrange
             var configurationMock = new Mock<IConfiguration>();
             configurationMock.Setup(x => x["JWT:Secret"]).Returns(TestingSecret);
             configurationMock.Setup(x => x["JWT:ValidIssuer"]).Returns("issuer");
             configurationMock.Setup(x => x["JWT:ValidAudience"]).Returns("audience");
             var jwtFactory = new JwtFactory(configurationMock.Object);
-
-            // Act
             var user = new ApplicationUser()
             {
                 Id = "fc0dcc69-d6df-435a-a9e0-a0b00afe1352",
@@ -36,9 +33,9 @@ namespace Acebook.UnitTests
             };
             var tokenId = Guid.Parse("054ce858-e899-40d3-894b-2aabb81f2bda");
             var fixedTime = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
             TokenDto token = jwtFactory.GenerateToken(user, tokenId, fixedTime);
 
-            // Assert
             Assert.Equal(
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5" +
                 "4bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjo" +

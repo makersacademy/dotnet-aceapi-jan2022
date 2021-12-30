@@ -11,13 +11,13 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.PostsRequests
 {
-    public class DeletePost : IClassFixture<TestingWebApplicationFactory<Startup>>
+    public class DeletePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public DeletePost(TestingWebApplicationFactory<Startup> factory)
+        public DeletePostTests(TestingWebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
             this.dbContext = this.factory.Services.GetService<ApplicationDbContext>();
@@ -28,7 +28,6 @@ namespace Acebook.IntegrationTests.PostsRequests
         [Fact]
         public async void DeletesPost()
         {
-            // Arrange
             var client = this.factory.CreateClient();
             var user = new ApplicationUser { UserName = "fred" };
             await this.userManager.CreateAsync(user, "Password123$");
@@ -38,10 +37,8 @@ namespace Acebook.IntegrationTests.PostsRequests
             this.dbContext.Posts.AddRange(post1, post2);
             await this.dbContext.SaveChangesAsync();
 
-            // Act
             var response = await client.DeleteAsync($"/api/posts/{post2.Id}");
 
-            // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(1, this.dbContext.Posts.Count());
             Assert.Equal("Hello World", this.dbContext.Posts.OrderBy(p => p.Id).First().Body);

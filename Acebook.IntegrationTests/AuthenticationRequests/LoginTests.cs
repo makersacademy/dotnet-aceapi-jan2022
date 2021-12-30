@@ -10,24 +10,22 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.AuthenticationRequests
 {
-    public class Login : IClassFixture<TestingWebApplicationFactory<Startup>>
+    public class LoginTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;
 
-        public Login(TestingWebApplicationFactory<Startup> factory)
+        public LoginTests(TestingWebApplicationFactory<Startup> factory)
         {
             this.factory = factory;
             this.dbContext = this.factory.Services.GetService<ApplicationDbContext>();
             this.dbContext.Database.EnsureClean();
         }
 
-        // POST /api/Authenticate/Login
-        // { username: "fred", password: "Password123$" }
         [Fact]
         public async void LogsInWhenRegistered()
         {
-            // Arrange
+            // Register
             var client = this.factory.CreateClient();
             await client.PostAsync(
                 "/api/authenticate/register",
@@ -36,20 +34,13 @@ namespace Acebook.IntegrationTests.AuthenticationRequests
                     System.Text.Encoding.UTF8,
                     "application/json"));
 
-            // Act
+            // Log in
             var response = await client.PostAsync(
                 "/api/authenticate/login",
                 new StringContent(
                     "{ \"username\": \"fred\", \"password\": \"Password123$\" }",
                     System.Text.Encoding.UTF8,
                     "application/json"));
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal(
-                "application/json; charset=utf-8",
-                response.Content.Headers.ContentType.ToString());
-
             var tokenDto = JsonConvert.DeserializeObject<TokenDto>(await response.Content.ReadAsStringAsync());
 
             // Attempt to use token to access protected resource
