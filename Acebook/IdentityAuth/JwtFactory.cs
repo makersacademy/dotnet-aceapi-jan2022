@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Acebook.IdentityAuth
 {
-  public class JwtFactory
+    public class JwtFactory
     {
         private const int TokenExpiryHours = 3;
         private readonly IConfiguration configuration;

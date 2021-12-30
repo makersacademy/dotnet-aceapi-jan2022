@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.AuthenticationRequests
 {
-  public class LoginTests : IClassFixture<TestingWebApplicationFactory<Startup>>
+    public class LoginTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;

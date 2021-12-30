@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.PostsRequests
 {
-  public class CreatePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
+    public class CreatePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Acebook
 {
-  public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {

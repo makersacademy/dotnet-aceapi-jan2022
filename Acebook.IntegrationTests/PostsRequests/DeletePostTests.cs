@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Acebook.IntegrationTests.PostsRequests
 {
-  public class DeletePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
+    public class DeletePostTests : IClassFixture<TestingWebApplicationFactory<Startup>>
     {
         private readonly TestingWebApplicationFactory<Startup> factory;
         private readonly ApplicationDbContext dbContext;

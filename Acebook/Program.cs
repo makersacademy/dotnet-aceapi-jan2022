@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Acebook
 {
-  public class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
