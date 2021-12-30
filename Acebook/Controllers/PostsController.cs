@@ -53,7 +53,7 @@ namespace Acebook.Controllers
 
         // POST: /api/Posts
         [HttpPost]
-        public async Task<ActionResult<Post>> PostPost(PostDto postDto)
+        public async Task<ActionResult<PostDto>> PostPost(PostDto postDto)
         {
             ApplicationUser user = await this.userManager.GetUserAsync(User);
 
@@ -71,7 +71,7 @@ namespace Acebook.Controllers
 
         // DELETE: /api/Posts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Post>> DeletePost(int id)
+        public async Task<ActionResult> DeletePost(int id)
         {
             var post = await this.context.Posts.FindAsync(id);
             if (post == null)
