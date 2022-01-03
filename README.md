@@ -18,8 +18,12 @@ Exercises](./INVESTIGATION.md), and then move onto the
 /usr/local/share/dotnet/dotnet
 # If you get 'dotnet not found', go install .NET Core
 
+# Create the databases
+; createdb AcebookTest
+; createdb AcebookDev
+
 ; dotnet test # Run tests, if all good keep going
-; dotnet watch run # To run the dev server
+; dotnet watch run --project Acebook # To run the dev server
 
 # To run the linter
 ; dotnet tool install --global dotnet-format

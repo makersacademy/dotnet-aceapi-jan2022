@@ -6,17 +6,29 @@ of paper. For example, [draw.io](https://draw.io/) or
 
 ### Challenge 1
 
-Use `curl` or [Postman](https://www.postman.com/) to:
+Get the project set up using the instructions in the [README](./README.md).
+
+When you've done this, you should be able to see the Swagger API explorer.
+
+### Challenge 2
+
+Use the API explorer, `curl`, or [Postman](https://www.postman.com/) to:
 
 * Sign up with a new account
 * Create a new post
 * Retrieve that post
 
-### Challenge 2
+[This video should get you started.](https://www.youtube.com/watch?v=Tv50sPRlo1A)
+
+Note, if you use 'curl' you'll need to pass the `--insecure` argument to ignore
+the errors caused by .NET not having a valid certificate (because it is a local
+dev server).
+
+### Challenge 3
 
 Create a diagram of what happens when the user creates a new post.
 
-### Challenge 3
+### Challenge 4
 
 _Note: You won't actually add this to the deployed application — this is just for
 investigation purposes._
