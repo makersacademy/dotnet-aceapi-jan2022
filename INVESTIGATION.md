@@ -12,13 +12,13 @@ When you've done this, you should be able to see the Swagger API explorer.
 
 ### Challenge 2
 
-Use the API explorer, `curl`, or [Postman](https://www.postman.com/) to:
+Use the API explorer, [Postman](https://www.postman.com/), or `curl` to:
 
 * Sign up with a new account
 * Create a new post
 * Retrieve that post
 
-[This video should get you started.](https://www.youtube.com/watch?v=Tv50sPRlo1A)
+[This video should get you started.](https://youtu.be/zrS_x2K2w7o)
 
 Note, if you use 'curl' you'll need to pass the `--insecure` argument to ignore
 the errors caused by .NET not having a valid certificate (because it is a local
