@@ -2,9 +2,9 @@
 
 Software engineers nearly always work in teams. In this module you will work in
 a simulated engineering team to develop the backend of a social media
-application. You will implement tickets on an existing system. You will
-encounter authentic problems, and use authentic practices and tools to resolve
-them.
+application. You will implement [a list of tickets](./TICKETS.md) on an existing
+system. You will encounter authentic problems, and use authentic practices and
+tools to resolve them.
 
 This module is tailored to be particularly relevant to roles that are primarily
 back-end software engineering using C# with ASP.NET Core and deploying to Azure.
@@ -126,11 +126,17 @@ beginners:
      with the team?
    * Anything else that has been an issue in past teams.
 
-3. **Create a team Slack channel.**  
+3. **Create a card board.**  
+   You can use Github Workspaces, Trello, or whatever you prefer.
+
+4. **Add the initial features to your card board**  
+   From [TICKETS.md](./TICKETS.md).
+
+5. **Create a team Slack channel.**  
    Put links to your card board & Github repo in the title, and invite your
    coaches for this module.
 
-4. **Get yourself a hot drink!**  
+6. **Get yourself a hot drink!**  
    That's the setup done.
 
 ### Planning
